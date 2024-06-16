@@ -13,18 +13,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('recipes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
             $table->uuid('id')->primary();
             $table->foreignUuId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('category_id')->constrained();
             $table->string('title');
+            $table->text('description');
             $table->text('image')->nullable();
-            $table->text('description')->nullable();
             $table->unsignedBigInteger('views')->default(0);
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->softDeletes();
+            $table->softDeletes(); //論理削除
         });
     }
 
