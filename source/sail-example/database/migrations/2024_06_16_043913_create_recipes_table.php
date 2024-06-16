@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -14,6 +15,16 @@ return new class extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->uuid('id')->primary();
+            $table->foreignUuId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained();
+            $table->string('title');
+            $table->text('image')->nullable();
+            $table->text('description')->nullable();
+            $table->unsignedBigInteger('views')->default(0);
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->softDeletes();
         });
     }
 
