@@ -14,10 +14,17 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="stylesheet" href="/css/color.css">
+        @if( isset($script) )
+            {{ $script }}
+        @endif
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+    <body class="font-sans antialiased background-color">
+        <div class="min-h-screen">
+            <!-- ここに共通ヘッダーのコンポーネントを読み込む -->
+            @include('layouts.announce-header')
+            @include('layouts.global-header')
+            @include('flash::message')
 
             <!-- Page Heading -->
             @if (isset($header))
@@ -29,9 +36,10 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="container mx-auto py-8">
                 {{ $slot }}
             </main>
         </div>
+        @include('layouts.footer')
     </body>
 </html>
