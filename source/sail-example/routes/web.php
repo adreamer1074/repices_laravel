@@ -24,11 +24,12 @@ Route::get('/dashboard', function () {
     
     Route::middleware('auth')->group(function () {
         Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipe.create');
+        Route::post('/recipes', [RecipeController::class, 'store'])->name('recipe.store');
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         });
-        
+
     Route::get('/recipes/{id}', [RecipeController::class, 'show'])->name('recipe.show');
 
 require __DIR__.'/auth.php';
