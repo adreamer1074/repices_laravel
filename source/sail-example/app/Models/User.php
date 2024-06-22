@@ -43,4 +43,9 @@ class User extends Authenticatable
         'password' => 'hashed',
         'id' => 'string'
     ];
+
+    public function recipe()
+    {
+        return $this-> hasMany(Recipe::class);
+    }
 }
