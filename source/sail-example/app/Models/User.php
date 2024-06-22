@@ -44,8 +44,13 @@ class User extends Authenticatable
         'id' => 'string'
     ];
 
-    public function recipe()
+    public function recipes()
     {
         return $this-> hasMany(Recipe::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }
